@@ -54,6 +54,16 @@ Or Use
 
 ## Usage
 
+Goto Directory where you checkout code
+
+vagrant up
+Get the ip of vagrant machine and just browse
+
+http://<ip>/index.php
+
+
+
+
 List of some changes made to original code
 
 -Upgrades all below versions in 
