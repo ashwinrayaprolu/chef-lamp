@@ -17,16 +17,16 @@ Need more fixes on making it idempotent. This implementation doesn't check for a
 
 Ubuntu Xenial (16.04)
 
--My Host Environment
-
--Vagrant 1.8.5
--Chef Development Kit Version: 0.17.17
--chef-client version: 12.13.37
--delivery version: master (f68e5c5804cd7d8a76c69b926fbb261e1070751b)
--berks version: 4.3.5
--kitchen version: 1.11.1
--ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-linux]
-
+#My Host Environment
+```t
+Vagrant 1.8.5
+Chef Development Kit Version: 0.17.17
+chef-client version: 12.13.37
+delivery version: master (f68e5c5804cd7d8a76c69b926fbb261e1070751b)
+berks version: 4.3.5
+kitchen version: 1.11.1
+ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-linux]
+```
 
 Note:
 With new upgrades to ruby functionality of berkshelf has broken hence we need to use berks provided by chef
