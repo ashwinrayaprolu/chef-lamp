@@ -1,4 +1,4 @@
-# myface-cookbook
+# LAMP-cookbook
 
 This is series 1 of different developmental machine cookbook's by me
 LAMP Stack for Developers.
