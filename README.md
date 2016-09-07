@@ -1,5 +1,5 @@
-# myface-cookbook
-
+# LAMP-cookbook
+```desc
 This is series 1 of different developmental machine cookbook's by me
 LAMP Stack for Developers.
 This is based of https://github.com/misheska/myface
@@ -8,6 +8,7 @@ I've updated this code as of August 28th 2016.
 Note: Upgraded almost all except mysql connectivity in php
 Ideal way of connecting to any database is using mysqlli interface not not using pdo with recent improvement. 
 Will add one update for that in coming weeks
+```
 
 @TODO
 Need more fixes on making it idempotent. This implementation doesn't check for availability of packages and tries to install each time we provision. Need to add unless if /if check's of package availabilty
@@ -16,8 +17,8 @@ Need more fixes on making it idempotent. This implementation doesn't check for a
 
 Ubuntu Xenial (16.04)
 
-My Host Environment
-
+#My Host Environment
+```t
 Vagrant 1.8.5
 Chef Development Kit Version: 0.17.17
 chef-client version: 12.13.37
@@ -25,7 +26,7 @@ delivery version: master (f68e5c5804cd7d8a76c69b926fbb261e1070751b)
 berks version: 4.3.5
 kitchen version: 1.11.1
 ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-linux]
-
+```
 
 Note:
 With new upgrades to ruby functionality of berkshelf has broken hence we need to use berks provided by chef
@@ -53,6 +54,16 @@ Or Use
 </table>
 
 ## Usage
+
+Goto Directory where you checkout code
+
+vagrant up
+Get the ip of vagrant machine and just browse
+
+http://<ip>/index.php
+
+
+
 
 List of some changes made to original code
 
