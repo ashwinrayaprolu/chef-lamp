@@ -1,0 +1,66 @@
+# Use phusion/baseimage as base image. To make your builds
+# reproducible, make sure you lock down to a specific version, not
+# to `latest`! See
+# https://github.com/phusion/baseimage-docker/blob/master/Changelog.md
+# for a list of version numbers.
+FROM phusion/baseimage:0.9.19
+
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
+
+
+#FROM ubuntu:xenial
+RUN rm -f /etc/service/sshd/down
+
+# Regenerate SSH host keys. baseimage-docker does not contain any, so you
+# have to do that yourself. You may also comment out this instruction; the
+# init system will auto-generate one during boot.
+RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
+RUN /usr/sbin/enable_insecure_key
+
+
+MAINTAINER Ashwin Rayaprolu <ashwin.rayaprolu@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update -y && \
+    apt-get install -y supervisor && \
+    apt-get autoclean && apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* 
+
+CMD ["/usr/bin/supervisord", "-n"]
+
+
+# XRDP Configuration
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update -y && \
+    apt-get install -y xrdp && \
+    apt-get autoclean && apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* && \
+    useradd -ms /bin/bash desktop && \
+    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini && \
+    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini && \
+    xrdp-keygen xrdp auto && \
+    echo "desktop:desktop" | chpasswd
+    
+    
+#Mate Configuration
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update -y && \
+    apt-get install -y mate-core \
+    mate-desktop-environment mate-notification-daemon \
+    gconf-service libnspr4 libnss3 fonts-liberation \
+    libappindicator1 libcurl3 fonts-wqy-microhei firefox && \
+    apt-get autoclean && apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo "mate-session" > /home/desktop/.xsession    
+
+ADD xrdp.conf /etc/supervisor/conf.d/xrdp.conf
+
+EXPOSE 3389
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
