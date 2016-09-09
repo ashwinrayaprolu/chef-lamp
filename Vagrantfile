@@ -1,6 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require './modules/Nodemanager.rb'
+
+include Nodemanager
+IpAddressList = Nodemanager.convertIPrange('192.168.1.105', '192.168.1.125')
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = '2'
 
@@ -71,66 +76,58 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Assumes that the node definitions are in the nodes
   # subfolder
-  nodes = Dir[File.join(root_dir,'nodes','*.json')]
+  nodetypes = Dir[File.join(root_dir,'nodes','*.json')]
 
   # Iterate over each of the JSON files
-  nodes.each do |file|
+  nodetypes.each do |file|
     puts "parsing #{file}"
     node_json = JSON.parse(File.read(file))
 
     # Only process the node if it has a vagrant section
     if(node_json["vagrant"])
+      
+      
+      0.upto(node_json["NumberOfNodes"]) do |nodeIndex| 
 
-      # Allow us to remove certain items from the run_list if we're
-      # using vagrant. Useful for things like networking configuration
-      # which may not apply.
-      if exclusions = node_json["vagrant"]["exclusions"]
-        exclusions.each do |exclusion|
-          if node_json["run_list"].delete(exclusion)
-            puts "removed #{exclusion} from the run list"
+        # Allow us to remove certain items from the run_list if we're
+        # using vagrant. Useful for things like networking configuration
+        # which may not apply.
+        if exclusions = node_json["vagrant"]["exclusions"]
+          exclusions.each do |exclusion|
+            if node_json["run_list"].delete(exclusion)
+              puts "removed #{exclusion} from the run list"
+            end
           end
         end
-      end
-
-      vagrant_name = node_json["vagrant"]["name"] 
-      vagrant_ip = node_json["vagrant"]["ip"]
-
-      config.vm.define vagrant_name do |vagrant|
-        vagrant.vm.hostname = vagrant_name
-
-        # Only use private networking if we specified an
-        # IP. Otherwise fallback to DHCP
-        if vagrant_ip
-          vagrant.vm.network :private_network, ip: vagrant_ip
-        end
-
+  
+        vagrant_name = node_json["vagrant"]["name"] + ".#{nodeIndex}"
+        #vagrant_ip = node_json["vagrant"]["ip"]
+        vagrant_ip = IpAddressList[nodeIndex]
+        config.vm.define vagrant_name do |vagrant|
+         
+          vagrant.vm.hostname = vagrant_name 
+          puts  "Working with host #{vagrant_name} with IP : #{vagrant_ip}" 
+  
+          # Only use private networking if we specified an
+          # IP. Otherwise fallback to DHCP
+          if vagrant_ip
+            vagrant.vm.network :private_network, ip: vagrant_ip
+          end
+  
+          
+          vagrant.vm.provision :chef_solo do |chef|
+            #config.vm.network "forwarded_port", guest: 80, host: 8080
+            # Instead of using add_recipe and add_role, just
+            # assign the node definition json, this will take
+            # care of populating the run_list.
+            chef.json = node_json          
+          end        
+          
+        end  # End of VM Config
         
-        vagrant.vm.provision :chef_solo do |chef|
-          #config.vm.network "forwarded_port", guest: 80, host: 8080
-      
-          #chef.run_list = [
-          #  'recipe[myface::default]'
-          #]
-          
-          # Use berks-cookbooks not cookbooks and remember
-          # to explicitly vendor berkshelf cookbooks
-          #chef.cookbooks_path = ["site-cookbooks"]
-          #chef.data_bags_path = "data_bags"
-          #chef.roles_path = "roles"
-
-          # Instead of using add_recipe and add_role, just
-          # assign the node definition json, this will take
-          # care of populating the run_list.
-          chef.json = node_json          
-          
-          
-          
-        end        
-        
-        
-      end
-    end
-  end
+      end # End of node interation on count
+    end  #End of vagrant found
+  end # End of each node type file
   
   
   

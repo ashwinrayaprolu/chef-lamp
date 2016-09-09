@@ -1,4 +1,5 @@
 {
+  "NumberOfNodes":5,
   "environment":"production",
   "authorization": {
     "sudo": {
@@ -24,6 +25,7 @@
   },
   "run_list":
   [
-    "recipe[myface::default]"
+    "recipe[myface::platform]",
+    "recipe[myface::docker]"
   ]
 }
