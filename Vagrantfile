@@ -27,6 +27,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.memory = 2048
     v.cpus = 2
   end
+  
+  # vagrant plugin install vagrant-hostmanager
+  config.hostmanager.enabled = false
+  config.hostmanager.manage_host = false
+  config.hostmanager.manage_guest = true
+  config.hostmanager.ignore_private_ip = false
+  config.hostmanager.include_offline = true
 
 
   # Set the version of chef to install using the vagrant-omnibus plugin
@@ -35,7 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   $ vagrant plugin install vagrant-omnibus
   #
   if Vagrant.has_plugin?("vagrant-omnibus")
-    config.omnibus.chef_version = 'latest'
+    config.omnibus.chef_version = '12.13.37'
   end
 
   # Every Vagrant virtual environment requires a box to build off of.
@@ -66,6 +73,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Enabling the Berkshelf plugin. To enable this globally, add this configuration
   # option to your ~/.vagrant.d/Vagrantfile file
+  # vagrant plugin install vagrant-berkshelf
   config.berkshelf.enabled = true
 
 
@@ -105,7 +113,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vagrant_ip = IpAddressList[nodeIndex]
         config.vm.define vagrant_name do |vagrant|
          
-          
+          #vagrant.hostmanager.aliases = %w(example-box.localdomain example-box-alias)
           # change the network card hardware for better performance
           #vagrant.vm.customize ["modifyvm", :id, "--nictype1", "virtio" ]
           #vagrant.vm.customize ["modifyvm", :id, "--nictype2", "virtio" ]
@@ -124,6 +132,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             vagrant.vm.network :private_network, ip: vagrant_ip
           end
   
+          # hostmanager provisioner
+          config.vm.provision :hostmanager
           
           vagrant.vm.provision :chef_solo do |chef|
             #config.vm.network "forwarded_port", guest: 80, host: 8080
