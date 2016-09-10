@@ -87,7 +87,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     if(node_json["vagrant"])
       
       
-      0.upto(node_json["NumberOfNodes"]) do |nodeIndex| 
+      1.upto(node_json["NumberOfNodes"]) do |nodeIndex| 
 
         # Allow us to remove certain items from the run_list if we're
         # using vagrant. Useful for things like networking configuration
@@ -105,6 +105,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vagrant_ip = IpAddressList[nodeIndex]
         config.vm.define vagrant_name do |vagrant|
          
+          
+          # change the network card hardware for better performance
+          #vagrant.vm.customize ["modifyvm", :id, "--nictype1", "virtio" ]
+          #vagrant.vm.customize ["modifyvm", :id, "--nictype2", "virtio" ]
+      
+          # suggested fix for slow network performance
+          # see https://github.com/mitchellh/vagrant/issues/1807
+          #vagrant.vm.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+          #vagrant.vm.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+          
           vagrant.vm.hostname = vagrant_name 
           puts  "Working with host #{vagrant_name} with IP : #{vagrant_ip}" 
   
@@ -120,6 +130,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             # Instead of using add_recipe and add_role, just
             # assign the node definition json, this will take
             # care of populating the run_list.
+            chef.data_bags_path = "data_bags"
             chef.json = node_json          
           end        
           

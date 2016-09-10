@@ -1,0 +1,14 @@
+{
+  "id": "cassandra",
+  //openssl passwd -1 "plaintextpassword"
+  "password": "$1$B9ivDlrz$VRnSFo107B8vWso63gyj0/", 
+  // ssh-keygen -f files/keys/lamp-server -C "Automated Cassandra Cluster"
+  // Now copy the keys from there to here
+  "ssh_keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC53J9fY/dpqXV5ree6MjZF99db2GOMf8RxM2eiyb8wKX50TEIdwwT97zb/8Y2sScJCHKLoSxHBEJ5f2EWaObjabAg6sNPlFGiX6NsELWXK1U1sosRRfAE3TDKsWbxk1S2gnN/fAizfJ4P1nNELqqwyPKLJElV/2GCoaFHxlbAw8M7QJDCD5GaqVN2sIvL/v6ZO8uyCMB4nfjGf8qYA/Mbi3dBiJ0xTRYDcfd2oNbXikWGFGUxY365rZAXWW8I4yCl+KKvahn+5WbOh/nY9fkNXWq1L7diH4dS2JTd3fTfwnbQdWh6y0uHeWEblRtZ0EZ69ZhhHbJ6WBsOM2Un39fKl Automated Cassandra Cluster"
+  ],
+  "groups": [ "cassandra"],
+  "uid": 9001,
+  "shell": "\/bin\/bash",
+  "comment": "cassandra user created"
+}

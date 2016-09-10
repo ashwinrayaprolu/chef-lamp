@@ -23,9 +23,12 @@
       "server_debian_password": "debpass",
       "server_repl_password": "replpass"
   },
+  "data_bags_path":"data_bags",
   "run_list":
   [
     "recipe[myface::platform]",
-    "recipe[myface::docker]"
+    "recipe[myface::docker]",
+    "recipe[myface::users]",
+    "recipe[java]"
   ]
 }
