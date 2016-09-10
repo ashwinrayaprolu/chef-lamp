@@ -1,5 +1,5 @@
 {
-  "NumberOfNodes":5,
+  "NumberOfNodes":3,
   "environment":"production",
   "authorization": {
     "sudo": {
@@ -15,7 +15,7 @@
   // See http://www.talkingquickly.co.uk/2014/08/auto-generate-vagrant-machines-from-chef-node-definitions/ for more on this
   "vagrant" : {
     "exclusions" : [],
-    "name" : "lamp-server",
+    "name" : "d1-node",
     "ip" : "192.168.50.4"
   },
   "mysql": {

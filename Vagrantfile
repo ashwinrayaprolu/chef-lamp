@@ -108,9 +108,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           end
         end
   
-        vagrant_name = node_json["vagrant"]["name"] + ".#{nodeIndex}"
+        vagrant_name = node_json["vagrant"]["name"] + "-#{nodeIndex}"
         #vagrant_ip = node_json["vagrant"]["ip"]
-        vagrant_ip = IpAddressList[nodeIndex]
+        vagrant_ip = IpAddressList[nodeIndex-1]
         config.vm.define vagrant_name do |vagrant|
          
           #vagrant.hostmanager.aliases = %w(example-box.localdomain example-box-alias)
@@ -143,6 +143,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             chef.data_bags_path = "data_bags"
             chef.json = node_json          
           end        
+          
+          1.upto(node_json["NumberOfNodes"]) do |myNodeIndex|
+            if myNodeIndex != nodeIndex
+              # Now add shell provisioner to add known hosts
+              targetHostName = node_json["vagrant"]["name"] + "-#{myNodeIndex}"
+              config.vm.provision "shell", inline: <<-SHELL
+                  runuser -l cassandra -c 'ssh-keygen -R #{targetHostName}'
+                  runuser -l cassandra -c 'ssh-keyscan -H #{targetHostName} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
+              SHELL
+            end 
+          end 
           
         end  # End of VM Config
         
