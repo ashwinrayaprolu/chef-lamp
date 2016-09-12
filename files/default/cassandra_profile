@@ -1,0 +1,6 @@
+export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+export CASSANDRA_INSTALL=/usr/local/cassandra
+export CASSANDRA_HOME=/usr/local/cassandra
+export CASSANDRA_HOST=$(sudo /sbin/ifconfig | grep "inet addr" | grep "192\.168" | awk '{ split($2,a , ":"); print a[2] }')	
+export CASSANDRA_SEEDS=$(cat /etc/hosts | grep "d1-no" | grep -v "127\.0" | awk -vORS=, '{print $1}' | sed 's/,$//')
+export CQLSH_NO_BUNDLED=TRUE

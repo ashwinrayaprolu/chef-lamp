@@ -111,7 +111,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vagrant_name = node_json["vagrant"]["name"] + "-#{nodeIndex}"
         #vagrant_ip = node_json["vagrant"]["ip"]
         vagrant_ip = IpAddressList[nodeIndex-1]
-        config.vm.define vagrant_name do |vagrant|
+        config.vm.define vagrant_name, autostart: true  do |vagrant|
          
           #vagrant.hostmanager.aliases = %w(example-box.localdomain example-box-alias)
           # change the network card hardware for better performance
@@ -147,10 +147,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           1.upto(node_json["NumberOfNodes"]) do |myNodeIndex|
             if myNodeIndex != nodeIndex
               # Now add shell provisioner to add known hosts
+              # To Find sudo /sbin/ifconfig | grep "inet addr" | grep "192\.168" | awk '{ split($2,a , ":"); print a[2] }'
               targetHostName = node_json["vagrant"]["name"] + "-#{myNodeIndex}"
-              config.vm.provision "shell", inline: <<-SHELL
+              vagrant.vm.provision "shell", preserve_order: true,inline: <<-SHELL
                   runuser -l cassandra -c 'ssh-keygen -R #{targetHostName}'
                   runuser -l cassandra -c 'ssh-keyscan -H #{targetHostName} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
+                  runuser -l cassandra -c 'sh /tmp/UpdateCassandraProperties.sh'
+                  apt -y install python-pip
+                  pip install cassandra-driver
               SHELL
             end 
           end 

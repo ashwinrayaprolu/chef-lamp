@@ -26,7 +26,9 @@ default['myface']['database']['app']['password'] = 'supersecret'
 default['myface']['database']['seed_file'] = '/tmp/myface-create.sql'   
   
 default['myface']['install']['php']='/tmp/InstallPHP.sh'   
-  
+default['myface']['install']['cassandra']='/tmp/InstallCassandra.sh'  
+default['myface']['update']['cassandra']='/tmp/UpdateCassandraProperties.sh'  
+ 
   
 default['java']['jdk_version'] = '8'
 default['java']['install_flavor'] = 'oracle'

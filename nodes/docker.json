@@ -29,6 +29,7 @@
     "recipe[myface::platform]",
     "recipe[myface::docker]",
     "recipe[myface::users]",
-    "recipe[java]"
+    "recipe[java]",
+    "recipe[myface::cassandra]"
   ]
 }
