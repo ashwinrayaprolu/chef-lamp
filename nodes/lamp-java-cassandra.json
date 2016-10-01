@@ -1,0 +1,36 @@
+{
+  "NumberOfNodes":3,
+  "environment":"production",
+  "authorization": {
+    "sudo": {
+      // the deploy user specifically gets sudo rights
+      // if you're using vagrant it's worth adding "vagrant"
+      // to this array
+      // The password for the dpeloy user is set in data_bags/users/deploy.json
+      // and should be generated using:
+      // openssl passwd -1 "plaintextpassword"
+      "users": ["deploy", "vagrant"]
+    }
+  },
+  // See http://www.talkingquickly.co.uk/2014/08/auto-generate-vagrant-machines-from-chef-node-definitions/ for more on this
+  "vagrant" : {
+    "exclusions" : [],
+    "name" : "d1-node",
+    "ip" : "192.168.50.4",
+    "cassandra_node":true
+  },
+  "mysql": {
+      "server_root_password": "rootpass",
+      "server_debian_password": "debpass",
+      "server_repl_password": "replpass"
+  },
+  "data_bags_path":"data_bags",
+  "run_list":
+  [
+    "recipe[myface::platform]",
+    "recipe[myface::docker]",
+    "recipe[myface::users]",
+    "recipe[java]",
+    "recipe[myface::cassandra]"
+  ]
+}

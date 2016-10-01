@@ -86,6 +86,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # subfolder
   nodetypes = Dir[File.join(root_dir,'nodes','*.json')]
 
+  ipindex = 0
   # Iterate over each of the JSON files
   nodetypes.each do |file|
     puts "parsing #{file}"
@@ -96,6 +97,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       
       
       1.upto(node_json["NumberOfNodes"]) do |nodeIndex| 
+        
+        ipindex = ipindex + 1
 
         # Allow us to remove certain items from the run_list if we're
         # using vagrant. Useful for things like networking configuration
@@ -109,8 +112,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         end
   
         vagrant_name = node_json["vagrant"]["name"] + "-#{nodeIndex}"
+        is_public = node_json["vagrant"]["is_public"]
         #vagrant_ip = node_json["vagrant"]["ip"]
-        vagrant_ip = IpAddressList[nodeIndex-1]
+        vagrant_ip = IpAddressList[ipindex-1]
         config.vm.define vagrant_name, autostart: true  do |vagrant|
          
           #vagrant.hostmanager.aliases = %w(example-box.localdomain example-box-alias)
@@ -129,8 +133,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           # Only use private networking if we specified an
           # IP. Otherwise fallback to DHCP
           if vagrant_ip
-            vagrant.vm.network :private_network, ip: vagrant_ip
+            vagrant.vm.network :private_network, ip: vagrant_ip,  :netmask => "255.255.0.0"
           end
+          
+          if is_public
+            config.vm.network "public_network", type: "dhcp", bridge: "em1"
+          end
+          
   
           # hostmanager provisioner
           config.vm.provision :hostmanager
@@ -144,20 +153,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             chef.json = node_json          
           end        
           
-          1.upto(node_json["NumberOfNodes"]) do |myNodeIndex|
-            if myNodeIndex != nodeIndex
-              # Now add shell provisioner to add known hosts
-              # To Find sudo /sbin/ifconfig | grep "inet addr" | grep "192\.168" | awk '{ split($2,a , ":"); print a[2] }'
-              targetHostName = node_json["vagrant"]["name"] + "-#{myNodeIndex}"
-              vagrant.vm.provision "shell", preserve_order: true,inline: <<-SHELL
-                  runuser -l cassandra -c 'ssh-keygen -R #{targetHostName}'
-                  runuser -l cassandra -c 'ssh-keyscan -H #{targetHostName} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
-                  runuser -l cassandra -c 'sh /tmp/UpdateCassandraProperties.sh'
-                  apt -y install python-pip
-                  pip install cassandra-driver
-              SHELL
+          if node_json["vagrant"]["cassandra_node"] 
+            1.upto(node_json["NumberOfNodes"]) do |myNodeIndex|
+              if myNodeIndex != nodeIndex
+                # Now add shell provisioner to add known hosts
+                # To Find sudo /sbin/ifconfig | grep "inet addr" | grep "192\.168" | awk '{ split($2,a , ":"); print a[2] }'
+                targetHostName = node_json["vagrant"]["name"] + "-#{myNodeIndex}"
+                vagrant.vm.provision "shell", preserve_order: true,inline: <<-SHELL
+                    runuser -l cassandra -c 'ssh-keygen -R #{targetHostName}'
+                    runuser -l cassandra -c 'ssh-keyscan -H #{targetHostName} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
+                    runuser -l cassandra -c 'sh /tmp/UpdateCassandraProperties.sh'
+                    apt -y install python-pip
+                    pip install cassandra-driver
+                SHELL
+              end 
             end 
-          end 
+          end
           
         end  # End of VM Config
         

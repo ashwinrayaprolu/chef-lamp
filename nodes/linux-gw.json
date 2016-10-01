@@ -1,5 +1,5 @@
 {
-  "NumberOfNodes":3,
+  "NumberOfNodes":1,
   "environment":"production",
   "authorization": {
     "sudo": {
@@ -15,8 +15,9 @@
   // See http://www.talkingquickly.co.uk/2014/08/auto-generate-vagrant-machines-from-chef-node-definitions/ for more on this
   "vagrant" : {
     "exclusions" : [],
-    "name" : "d1-node",
-    "ip" : "192.168.50.4"
+    "name" : "d1-gw",
+    "ip" : "192.168.50.4",
+    "is_public":true
   },
   "mysql": {
       "server_root_password": "rootpass",
@@ -26,10 +27,6 @@
   "data_bags_path":"data_bags",
   "run_list":
   [
-    "recipe[myface::platform]",
-    "recipe[myface::docker]",
-    "recipe[myface::users]",
-    "recipe[java]",
-    "recipe[myface::cassandra]"
+    "recipe[myface::platform]"
   ]
 }
