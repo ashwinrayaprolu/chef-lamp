@@ -28,9 +28,11 @@
   "run_list":
   [
     "recipe[myface::platform]",
+    "recipe[myface::disable_ipv6]",
     "recipe[myface::docker]",
     "recipe[myface::users]",
     "recipe[java]",
-    "recipe[myface::cassandra]"
+    "recipe[myface::cassandra]",
+    "recipe[myface::hdfs]"
   ]
 }

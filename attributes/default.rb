@@ -30,6 +30,9 @@ default['myface']['install']['cassandra']='/tmp/InstallCassandra.sh'
 default['myface']['update']['cassandra']='/tmp/UpdateCassandraProperties.sh'  
  
   
+default['myface']['install']['hdfs']='/tmp/InstallHadoop.sh'    
+  
+  
 default['java']['jdk_version'] = '8'
 default['java']['install_flavor'] = 'oracle'
 default['java']['accept_license_agreement'] = true  
