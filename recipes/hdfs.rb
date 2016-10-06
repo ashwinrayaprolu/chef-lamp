@@ -36,6 +36,15 @@ begin
     command "sh InstallHadoop.sh"
     #not_if 'test -d /usr/local/cassandra', user: 'root'
   end
+  
+  # Copy all hadoop config files from cookbook to target machine
+  remote_directory '/usr/local/hadoop/etc/hadoop/' do
+    source 'hadoop/master'
+    owner 'hduser'
+    group 'hadoop'
+    mode '0755'
+    action :create
+  end  
 
   
     

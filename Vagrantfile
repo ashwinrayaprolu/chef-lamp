@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   # Setup resource requirements
   config.vm.provider "virtualbox" do |v|
-    v.memory = 2048
+    v.memory = 6048
     v.cpus = 2
   end
   
@@ -112,6 +112,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         end
   
         vagrant_name = node_json["vagrant"]["name"] + "-#{nodeIndex}"
+        if(nodeIndex == 1)  
+          alias_name = "HadoopMaster"
+        else
+          alias_name = "HadoopSlave" + "#{nodeIndex-1}"
+        end
         is_public = node_json["vagrant"]["is_public"]
         #vagrant_ip = node_json["vagrant"]["ip"]
         vagrant_ip = IpAddressList[ipindex-1]
@@ -127,6 +132,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           #vagrant.vm.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
           #vagrant.vm.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
           
+          
           vagrant.vm.hostname = vagrant_name 
           puts  "Working with host #{vagrant_name} with IP : #{vagrant_ip}" 
   
@@ -138,9 +144,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           
           if is_public
             config.vm.network "public_network", type: "dhcp", bridge: "em1"
+            vagrant.vm.provider :virtualbox do |vb|
+                vb.customize ["modifyvm", :id, "--memory", "2048"]
+                vb.customize ["modifyvm", :id, "--cpus", "2"]
+            end
+          else
+            # Public network is used for gateway so not used
+            vagrant.hostmanager.aliases = alias_name
+            vagrant.vm.provider :virtualbox do |vb|
+                vb.customize ["modifyvm", :id, "--memory", "6048"]
+                vb.customize ["modifyvm", :id, "--cpus", "2"]
+            end
           end
           
-  
           # hostmanager provisioner
           config.vm.provision :hostmanager
           
@@ -165,7 +181,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                     runuser -l cassandra -c 'sh /tmp/UpdateCassandraProperties.sh'
                     apt -y install python-pip
                     pip install cassandra-driver
-                SHELL
+SHELL
+                
+                # Add host files for all hadoop nodes. We know last node is gateway node to ignore that
+                if(myNodeIndex != node_json["NumberOfNodes"]) 
+                  if(myNodeIndex == 1)  
+                    alias_name = "HadoopMaster"
+                  else
+                    alias_name = "HadoopSlave" + "#{myNodeIndex-1}"
+                  end
+                  
+                  vagrant.vm.provision "shell", preserve_order: true,inline: <<-NEWDOC
+                    runuser -l hduser -c 'ssh-keygen -R #{alias_name}'
+                    runuser -l hduser -c 'ssh-keyscan -H #{alias_name} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
+NEWDOC
+                   
+                end             
               end 
             end 
           end

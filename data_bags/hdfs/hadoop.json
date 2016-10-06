@@ -1,7 +1,7 @@
 {
   "id": "hduser",
   //openssl passwd -1 "hduser@123"
-  "password": "$1$mJ/SuHFm$E7ly20Oh/9WInuUdTdtiZ", 
+  "password": "$1$AwLQNj1l$whxPiG0c4MT0zHTs3UEeu.", 
   // ssh-keygen -f files/keys/lamp-server -C "Automated HDFS Cluster"
   // Now copy the keys from there to here
   "ssh_keys": [

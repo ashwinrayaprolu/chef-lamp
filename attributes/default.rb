@@ -10,6 +10,8 @@ default['myface']['document_root'] = '/srv/apache/myface'
   
 default['myface']['private_key']['path']='/home/cassandra/.ssh/id_rsa'
   
+default['myface']['host_key']['hduser']['path']='/home/hduser/.ssh/id_rsa'
+default['myface']['host_key']['cassandra']['path']='/home/cassandra/.ssh/id_rsa'  
   
 default['myface']['database']['name'] = 'myface'
 default['myface']['database']['host'] = '127.0.0.1'
