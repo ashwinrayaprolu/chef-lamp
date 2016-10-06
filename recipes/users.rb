@@ -25,6 +25,15 @@ cookbook_file node['myface']['host_key']['cassandra']['path'] do
 end
 #runuser -l hduser -c "rm -rf /home/hduser/.ssh/id_rsa*" &&
 #runuser -l hduser -c "ssh-keygen -t rsa -f /home/hduser/.ssh/id_rsa -P ''" &&
+#runuser -l hduser -c "touch /home/hduser/.ssh/known_hosts" &&
+#runuser -l hduser -c "ssh-keygen -R localhost" &&
+#runuser -l hduser -c "cat /home/hduser/.ssh/id_rsa.pub >> /home/hduser/.ssh/authorized_keys" &&
+#runuser -l hduser -c "chmod og-wx /home/hduser/.ssh/authorized_keys" &&
+
+
+
+
+
 cookbook_file node['myface']['host_key']['hduser']['path'] do
   source 'keys/lamp-server'
   owner 'hduser'

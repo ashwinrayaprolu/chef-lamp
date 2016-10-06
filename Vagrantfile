@@ -184,19 +184,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 SHELL
                 
                 # Add host files for all hadoop nodes. We know last node is gateway node to ignore that
-                if(myNodeIndex != node_json["NumberOfNodes"]) 
+               # if(is_public == false) 
                   if(myNodeIndex == 1)  
                     alias_name = "HadoopMaster"
                   else
                     alias_name = "HadoopSlave" + "#{myNodeIndex-1}"
                   end
-                  
+                  puts "Working with node #{alias_name}"
                   vagrant.vm.provision "shell", preserve_order: true,inline: <<-NEWDOC
                     runuser -l hduser -c 'ssh-keygen -R #{alias_name}'
                     runuser -l hduser -c 'ssh-keyscan -H #{alias_name} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
 NEWDOC
                    
-                end             
+               # end            
               end 
             end 
           end
