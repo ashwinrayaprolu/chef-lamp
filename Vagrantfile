@@ -148,7 +148,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
           # Only use private networking if we specified an
           # IP. Otherwise fallback to DHCP
-          if vagrant_ip
+          if vagrant_ip && is_public
+            # Assumption is we would never cross more than 15 hosts per machine
+            # We are assuming CIDR of /28 for ip address for given host
+            vagrant_ip = IpAddressList[15]
+            vagrant.vm.network :private_network, ip: vagrant_ip,  :netmask => "255.255.0.0"
+          end
+          
+          if vagrant_ip && !is_public
             vagrant.vm.network :private_network, ip: vagrant_ip,  :netmask => "255.255.0.0"
           end
           
