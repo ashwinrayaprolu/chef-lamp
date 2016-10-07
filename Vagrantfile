@@ -179,32 +179,69 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             chef.json = node_json          
           end        
           
+          # Below code is run for Nodes that are based on Cassandra/Hadoop/Kafka.
+          # Mostly adding relative properties and known hosts
           if node_json["vagrant"]["cassandra_node"] 
+            vagrant.vm.provision "shell", preserve_order: true,inline: <<-HDCONF
+                runuser -l hduser -c 'rm -rf /usr/local/hadoop/etc/hadoop/masters'
+                runuser -l hduser -c 'rm -rf /usr/local/hadoop/etc/hadoop/slaves'
+HDCONF
+
+
+         #Add local host to hduser ssh known hosts
+        vagrant.vm.provision "shell", preserve_order: true,inline: <<-NEWDOC
+            runuser -l hduser -c 'ssh-keygen -R localhost'
+            runuser -l hduser -c 'ssh-keyscan -H localhost | grep "ssh-rsa" >> ~/.ssh/known_hosts'
+            runuser -l hduser -c 'ssh-keyscan -H localhost | grep "sha2-nistp256" >> ~/.ssh/known_hosts'
+NEWDOC
+
+            # Iterate over all nodes
             1.upto(node_json["NumberOfNodes"]) do |myNodeIndex|
+              
+              if(myNodeIndex == 1) 
+                alias_name = "HadoopMaster"
+                nodeFileName = "/usr/local/hadoop/etc/hadoop/masters";
+              else
+                nodeFileName = "/usr/local/hadoop/etc/hadoop/slaves";
+                alias_name = "HadoopSlave" + "#{myNodeIndex-1}"
+              end
+              
+              puts "Adding Hadoop Config for #{nodeFileName}"
+                
+              vagrant.vm.provision "shell", preserve_order: true,inline: <<-HDCONF
+                  runuser -l hduser -c 'touch #{nodeFileName}'
+                  runuser -l hduser -c 'echo  "#{alias_name}">> #{nodeFileName}'
+HDCONF
+          
+
+              # Add host files for all hadoop nodes. We know last node is gateway node to ignore that
+             # if(is_public == false) 
+                if(myNodeIndex == 1)  
+                  alias_name = "HadoopMaster"
+                else
+                  alias_name = "HadoopSlave" + "#{myNodeIndex-1}"
+                end
+                puts "Working with node #{alias_name}"
+                vagrant.vm.provision "shell", preserve_order: true,inline: <<-NEWDOC
+                  runuser -l hduser -c 'ssh-keygen -R #{alias_name}'
+                  runuser -l hduser -c 'ssh-keyscan -H #{alias_name} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
+                  runuser -l hduser -c 'ssh-keyscan -H #{alias_name} | grep "sha2-nistp256" >> ~/.ssh/known_hosts'
+NEWDOC
+
+
               if myNodeIndex != nodeIndex
                 # Now add shell provisioner to add known hosts
                 # To Find sudo /sbin/ifconfig | grep "inet addr" | grep "192\.168" | awk '{ split($2,a , ":"); print a[2] }'
                 targetHostName = node_json["vagrant"]["name"] + "-#{myNodeIndex}"
                 vagrant.vm.provision "shell", preserve_order: true,inline: <<-SHELL
                     runuser -l cassandra -c 'ssh-keygen -R #{targetHostName}'
-                    runuser -l cassandra -c 'ssh-keyscan -H #{targetHostName} | grep "ssh-rsa\|sha2-nistp256" >> ~/.ssh/known_hosts'
+                    runuser -l cassandra -c 'ssh-keyscan -H #{targetHostName} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
+                    runuser -l cassandra -c 'ssh-keyscan -H #{targetHostName} | grep "sha2-nistp256" >> ~/.ssh/known_hosts'
                     runuser -l cassandra -c 'sh /tmp/UpdateCassandraProperties.sh'
                     apt -y install python-pip
                     pip install cassandra-driver
 SHELL
                 
-                # Add host files for all hadoop nodes. We know last node is gateway node to ignore that
-               # if(is_public == false) 
-                  if(myNodeIndex == 1)  
-                    alias_name = "HadoopMaster"
-                  else
-                    alias_name = "HadoopSlave" + "#{myNodeIndex-1}"
-                  end
-                  puts "Working with node #{alias_name}"
-                  vagrant.vm.provision "shell", preserve_order: true,inline: <<-NEWDOC
-                    runuser -l hduser -c 'ssh-keygen -R #{alias_name}'
-                    runuser -l hduser -c 'ssh-keyscan -H #{alias_name} | grep "ssh-rsa\|sha2-nistp256" >> ~/.ssh/known_hosts'
-NEWDOC
                    
                # end            
               end 

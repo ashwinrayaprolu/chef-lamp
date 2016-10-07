@@ -1,5 +1,5 @@
 {
-  "NumberOfNodes":3,
+  "NumberOfNodes":5,
   "environment":"production",
   "authorization": {
     "sudo": {
