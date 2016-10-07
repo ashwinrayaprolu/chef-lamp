@@ -1,5 +1,15 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+# On vagrant up check that we have the latest repo changes
+if ARGV[0] == "up" && ARGV.join(" ") != "up --no-provision"
+  gs = `git status` # command to check repo status
+  gs.scan(/.*Your branch is behind.*/m) { |mtch| # check for out of date message
+    puts "Your Vagrant files are out of date... fetching..."
+    `git pull origin master` # command to fetch newest files.
+    exec "vagrant up --no-provision;vagrant provision" # Re-run vagrant up and provision
+  }
+end
+
 
 require './modules/Nodemanager.rb'
 
@@ -177,7 +187,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                 targetHostName = node_json["vagrant"]["name"] + "-#{myNodeIndex}"
                 vagrant.vm.provision "shell", preserve_order: true,inline: <<-SHELL
                     runuser -l cassandra -c 'ssh-keygen -R #{targetHostName}'
-                    runuser -l cassandra -c 'ssh-keyscan -H #{targetHostName} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
+                    runuser -l cassandra -c 'ssh-keyscan -H #{targetHostName} | grep "ssh-rsa\|sha2-nistp256" >> ~/.ssh/known_hosts'
                     runuser -l cassandra -c 'sh /tmp/UpdateCassandraProperties.sh'
                     apt -y install python-pip
                     pip install cassandra-driver
@@ -193,7 +203,7 @@ SHELL
                   puts "Working with node #{alias_name}"
                   vagrant.vm.provision "shell", preserve_order: true,inline: <<-NEWDOC
                     runuser -l hduser -c 'ssh-keygen -R #{alias_name}'
-                    runuser -l hduser -c 'ssh-keyscan -H #{alias_name} | grep "ssh-rsa" >> ~/.ssh/known_hosts'
+                    runuser -l hduser -c 'ssh-keyscan -H #{alias_name} | grep "ssh-rsa\|sha2-nistp256" >> ~/.ssh/known_hosts'
 NEWDOC
                    
                # end            
