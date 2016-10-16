@@ -3,7 +3,7 @@ include_recipe 'tarball::default'
 begin
   
   # Fetch the tarball if it's not a local file
-  remote_file '/tmp/hadoop-2.7.3.tar.gz' do
+  remote_file '/usr/devenv/share/downloads/hadoop-2.7.3.tar.gz' do
     source 'http://www-us.apache.org/dist/hadoop/core/hadoop-2.7.3/hadoop-2.7.3.tar.gz'
   end
   

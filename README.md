@@ -140,6 +140,41 @@ Include `myface` in your node's `run_list`:
 }
 ```
 
+
+### INSTALLTION Process
+
+```Steps
+1  Run sh hostProvision.sh   
+	#This will download all libaries from internet and store in local
+2  Run
+
+   	 docker pull sameersbn/squid:3.3.8-19
+   	   
+   	 docker run --name squid -d --restart=always \
+ 		 --publish 3128:3128 \
+  		 --volume /srv/docker/squid/cache:/var/spool/squid3 \
+  			sameersbn/squid:3.3.8-19
+    Above commands will setup proxy server. This would good as our VM's will start downloading
+    lot of libraries over the net and it would slow the provisioning if we have to go to net for 
+    each VM. Caching all of them using SQUID will help up speed up provisioning
+    
+3	Modify Vagrantfile
+ Change below proxy configuration to suit your needs
+  #Setup Proxy
+  # vagrant plugin install vagrant-proxyconf
+  config.proxy.http     = "http://10.0.0.175:3128/"
+  config.proxy.https    = "http://10.0.0.175:3128/"
+  
+  # exclude your internal networks, including the Vagrant ones
+  config.proxy.no_proxy = "localhost,127.0.0.1,192.168.1.*"
+
+4  Run 
+	vagrant up --no-provision     # We need to first get all machines up without provisioning
+	vagrant provision            # We need all server's up to configure passwordless authentication
+
+```
+
+
 ## License and Authors
 
 Author:: Ashwin Rayaprolu (ashwin.rayaprolu@gmail.com)

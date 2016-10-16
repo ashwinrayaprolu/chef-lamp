@@ -32,7 +32,9 @@
     "recipe[myface::docker]",
     "recipe[myface::users]",
     "recipe[java]",
+    "recipe[myface::hdfs]",
     "recipe[myface::cassandra]",
-    "recipe[myface::hdfs]"
+    "recipe[myface::zookeeper]",
+    "recipe[myface::kafka]"
   ]
 }

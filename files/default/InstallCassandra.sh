@@ -1,5 +1,5 @@
 sudo rm -rf /usr/local/cassandra* &&
-sudo tar -xvzf /tmp/apache-cassandra-3.7-bin.tar.gz -C /usr/local/ &&
+sudo tar -xvzf /usr/devenv/share/downloads/apache-cassandra-3.7-bin.tar.gz -C /usr/local/ &&
 cd /usr/local/ &&
 sudo mv apache-cassandra-3.7 cassandra-3.7 &&
 sudo ln -s /usr/local/cassandra-3.7 /usr/local/cassandra &&

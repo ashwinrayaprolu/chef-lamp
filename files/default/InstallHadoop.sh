@@ -1,5 +1,5 @@
 sudo rm -rf /usr/local/hadoop* &&
-sudo tar -xvzf /tmp/hadoop-2.7.3.tar.gz -C /usr/local/ &&
+sudo tar -xvzf /usr/devenv/share/downloads/hadoop-2.7.3.tar.gz -C /usr/local/ &&
 cd /usr/local/ &&
 sudo ln -s /usr/local/hadoop-2.7.3 /usr/local/hadoop &&
 sudo chown -R hduser:hadoop /usr/local/hadoop/ &&

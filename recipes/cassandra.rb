@@ -5,7 +5,7 @@ include_recipe 'tarball::default'
   
   
   # Fetch the tarball if it's not a local file
-  remote_file '/tmp/apache-cassandra-3.7-bin.tar.gz' do
+  remote_file '/usr/devenv/share/downloads/apache-cassandra-3.7-bin.tar.gz' do
     source 'http://www-us.apache.org/dist/cassandra/3.7/apache-cassandra-3.7-bin.tar.gz'
   end
   

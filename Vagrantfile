@@ -11,7 +11,28 @@ if ARGV[0] == "up" && ARGV.join(" ") != "up --no-provision"
 end
 
 
+require 'open3'
 require './modules/Nodemanager.rb'
+#require './modules/LocalCommand.rb'
+
+
+=begin
+
+cmd = "/opt/chefdk/bin/chef-client --local -c "+File.absolute_path(File.dirname(__FILE__))+"solo.rb -j "+File.absolute_path(File.dirname(__FILE__))+"solo.json"
+
+cmd = "sh hostProvision.sh"
+
+output `sh hostProvision.sh`
+p output
+
+puts "--------------------------Running Local Provisioner-------------" 
+Open3.popen3(cmd) do |stdin,stdout,stderr,wait_thr|
+  puts "stdout is " + stdout.read
+  puts "stderr is " + stderr.read
+end
+
+puts "----------------------End Running Local Provisioner-------------" 
+=end
 
 include Nodemanager
 IpAddressList = Nodemanager.convertIPrange('192.168.1.105', '192.168.1.125')
@@ -21,11 +42,18 @@ VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.require_version '>= 1.5.0'
 
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  
+  #And via the command line like this:
+  #vagrant provision --provision-with list-files
+  
+  #config.vm.provision "DownloadFiles", type: "local_shell", command: "/opt/chefdk/bin/chef-client --local -c solo.rb -j solo.json"
+  
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
-
   config.vm.hostname = 'myface-berkshelf'
   # Create Share for us to Share some files
   config.vm.synced_folder "share/", "/usr/devenv/share/", disabled: false
@@ -34,9 +62,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   # Setup resource requirements
   config.vm.provider "virtualbox" do |v|
-    v.memory = 6048
+    v.memory = 2048
     v.cpus = 2
   end
+  
+  #Setup Proxy
+  # vagrant plugin install vagrant-proxyconf
+  config.proxy.http     = "http://10.0.0.175:3128/"
+  config.proxy.https    = "http://10.0.0.175:3128/"
+  
+  # exclude your internal networks, including the Vagrant ones
+  config.proxy.no_proxy = "localhost,127.0.0.1,192.168.1.*"
+  
   
   # vagrant plugin install vagrant-hostmanager
   config.hostmanager.enabled = false
@@ -213,11 +250,12 @@ NEWDOC
                 alias_name = "HadoopSlave" + "#{myNodeIndex-1}"
               end
               
-              puts "Adding Hadoop Config for #{nodeFileName}"
+             # puts "Adding Hadoop Config for #{nodeFileName}"
                 
               vagrant.vm.provision "shell", preserve_order: true,inline: <<-HDCONF
                   runuser -l hduser -c 'touch #{nodeFileName}'
                   runuser -l hduser -c 'echo  "#{alias_name}">> #{nodeFileName}'
+                  runuser -l hduser -c 'echo "server.#{myNodeIndex}=#{alias_name}:2888:3888">>/usr/local/zookeeper/conf/zoo.cfg'
 HDCONF
           
 
@@ -228,7 +266,7 @@ HDCONF
                 else
                   alias_name = "HadoopSlave" + "#{myNodeIndex-1}"
                 end
-                puts "Working with node #{alias_name}"
+                #puts "Working with node #{alias_name}"
                 vagrant.vm.provision "shell", preserve_order: true,inline: <<-NEWDOC
                   runuser -l hduser -c 'ssh-keygen -R #{alias_name}'
                   runuser -l hduser -c 'ssh-keyscan -H #{alias_name} | grep "ssh-rsa" >> ~/.ssh/known_hosts'

@@ -1,0 +1,338 @@
+Generated at 2016-10-15 12:49:06 -0700
+Mixlib::ShellOut::ShellCommandFailed: execute[Start Vagrant] (op::vagrant line 5) had an error: Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
+---- Begin output of vagrant provision d1-node-1 ----
+STDOUT: parsing /home/ashwin/development/vagrant/platform/myface/nodes/linux-gw.json
+parsing /home/ashwin/development/vagrant/platform/myface/nodes/distributed-env.json
+parsing /home/ashwin/development/vagrant/platform/myface/nodes/localhost.json
+Working with host d1-node-1 with IP : 192.168.1.106
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+==> d1-node-1: Loading Berkshelf datafile...
+==> d1-node-1: Sharing cookbooks with VM
+==> d1-node-1: Updating Vagrant's Berkshelf...
+==> d1-node-1: Resolving cookbook dependencies...
+==> d1-node-1: Fetching 'myface' from source at .
+==> d1-node-1: Using line (0.6.3) from git://github.com/someara/line-cookbook.git (at master)
+==> d1-node-1: Using apt (2.9.2)
+==> d1-node-1: Using chef-sugar (3.4.0)
+==> d1-node-1: Using compat_resource (12.13.38)
+==> d1-node-1: Using firewall (2.4.0)
+==> d1-node-1: Using java (1.42.0)
+==> d1-node-1: Using yum-epel (0.7.1)
+==> d1-node-1: Using database (5.1.2)
+==> d1-node-1: Using apache2 (3.2.2)
+==> d1-node-1: Using mingw (1.2.4)
+==> d1-node-1: Using mysql (8.0.2)
+==> d1-node-1: Using openssl (4.4.0)
+==> d1-node-1: Using seven_zip (2.0.2)
+==> d1-node-1: Using tarball (0.0.1) from git://github.com/ooyala/tarball-chef-cookbook.git (at master)
+==> d1-node-1: Using windows (1.44.3)
+==> d1-node-1: Using build-essential (6.0.4)
+==> d1-node-1: Using chef_handler (1.4.0)
+==> d1-node-1: Using mariadb (0.3.1)
+==> d1-node-1: Using mysql2_chef_gem (1.1.0)
+==> d1-node-1: Using tar (0.7.0)
+==> d1-node-1: Using yum (3.12.0)
+==> d1-node-1: Using homebrew (2.1.2)
+==> d1-node-1: Using postgresql (4.0.6)
+==> d1-node-1: Using myface (1.0.0) from source at .
+==> d1-node-1: Using users (3.0.0)
+==> d1-node-1: Vendoring apache2 (3.2.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/apache2
+==> d1-node-1: Vendoring apt (2.9.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/apt
+==> d1-node-1: Vendoring build-essential (6.0.4) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/build-essential
+==> d1-node-1: Vendoring chef-sugar (3.4.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/chef-sugar
+==> d1-node-1: Vendoring chef_handler (1.4.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/chef_handler
+==> d1-node-1: Vendoring compat_resource (12.13.38) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/compat_resource
+==> d1-node-1: Vendoring database (5.1.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/database
+==> d1-node-1: Vendoring firewall (2.4.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/firewall
+==> d1-node-1: Vendoring homebrew (2.1.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/homebrew
+==> d1-node-1: Vendoring java (1.42.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/java
+==> d1-node-1: Vendoring line (0.6.3) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/line
+==> d1-node-1: Vendoring mariadb (0.3.1) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/mariadb
+==> d1-node-1: Vendoring mingw (1.2.4) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/mingw
+==> d1-node-1: Vendoring myface (1.0.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/myface
+==> d1-node-1: Vendoring mysql (8.0.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/mysql
+==> d1-node-1: Vendoring mysql2_chef_gem (1.1.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/mysql2_chef_gem
+==> d1-node-1: Vendoring openssl (4.4.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/openssl
+==> d1-node-1: Vendoring postgresql (4.0.6) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/postgresql
+==> d1-node-1: Vendoring seven_zip (2.0.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/seven_zip
+==> d1-node-1: Vendoring tar (0.7.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/tar
+==> d1-node-1: Vendoring tarball (0.0.1) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/tarball
+==> d1-node-1: Vendoring users (3.0.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/users
+==> d1-node-1: Vendoring windows (1.44.3) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/windows
+==> d1-node-1: Vendoring yum (3.12.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/yum
+==> d1-node-1: Vendoring yum-epel (0.7.1) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/yum-epel
+==> d1-node-1: Using hostname "d1-node-1" as node name for Chef...
+==> d1-node-1: Chef 12.13.37 Omnibus package is already installed.
+==> d1-node-1: Running provisioner: hostmanager...
+Working with host d1-gw-1 with IP : 192.168.1.105
+Working with host d1-node-2 with IP : 192.168.1.107
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+Working with host d1-node-3 with IP : 192.168.1.108
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+Working with host d1-node-4 with IP : 192.168.1.109
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+Working with host d1-node-5 with IP : 192.168.1.110
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+==> d1-node-1: Running provisioner: chef_solo...
+==> d1-node-1: Detected Chef (latest) is already installed
+STDERR: Shared folders that Chef requires are missing on the virtual machine.
+This is usually due to configuration changing after already booting the
+machine. The fix is to run a `vagrant reload` so that the proper shared
+folders will be prepared and mounted on the VM.
+---- End output of vagrant provision d1-node-1 ----
+Ran vagrant provision d1-node-1 returned 1
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/mixlib-shellout-2.2.6/lib/mixlib/shellout.rb:289:in `invalid!'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/mixlib-shellout-2.2.6/lib/mixlib/shellout.rb:276:in `error!'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/mixin/shell_out.rb:45:in `shell_out!'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/provider/execute.rb:62:in `block in action_run'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/mixin/why_run.rb:52:in `add_action'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/provider.rb:176:in `converge_by'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/provider/execute.rb:60:in `action_run'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/provider.rb:145:in `run_action'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource.rb:603:in `run_action'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:69:in `run_action'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:97:in `block (2 levels) in converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:97:in `each'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:97:in `block in converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/resource_list.rb:94:in `block in execute_each_resource'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:116:in `call'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:116:in `call_iterator_block'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:85:in `step'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:104:in `iterate'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:55:in `each_with_index'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/resource_list.rb:92:in `execute_each_resource'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:96:in `converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:669:in `block in converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:664:in `catch'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:664:in `converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:703:in `converge_and_save'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:283:in `run'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:302:in `block in fork_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:290:in `fork'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:290:in `fork_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:255:in `block in run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/local_mode.rb:44:in `with_server_connectivity'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:243:in `run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:464:in `sleep_then_run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:451:in `block in interval_run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:450:in `loop'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:450:in `interval_run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:434:in `run_application'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:60:in `run'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/bin/chef-client:26:in `<top (required)>'
+/opt/chefdk/bin/chef-client:59:in `load'
+/opt/chefdk/bin/chef-client:59:in `<main>'
+
+>>>> Caused by Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
+---- Begin output of vagrant provision d1-node-1 ----
+STDOUT: parsing /home/ashwin/development/vagrant/platform/myface/nodes/linux-gw.json
+parsing /home/ashwin/development/vagrant/platform/myface/nodes/distributed-env.json
+parsing /home/ashwin/development/vagrant/platform/myface/nodes/localhost.json
+Working with host d1-node-1 with IP : 192.168.1.106
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+==> d1-node-1: Loading Berkshelf datafile...
+==> d1-node-1: Sharing cookbooks with VM
+==> d1-node-1: Updating Vagrant's Berkshelf...
+==> d1-node-1: Resolving cookbook dependencies...
+==> d1-node-1: Fetching 'myface' from source at .
+==> d1-node-1: Using line (0.6.3) from git://github.com/someara/line-cookbook.git (at master)
+==> d1-node-1: Using apt (2.9.2)
+==> d1-node-1: Using chef-sugar (3.4.0)
+==> d1-node-1: Using compat_resource (12.13.38)
+==> d1-node-1: Using firewall (2.4.0)
+==> d1-node-1: Using java (1.42.0)
+==> d1-node-1: Using yum-epel (0.7.1)
+==> d1-node-1: Using database (5.1.2)
+==> d1-node-1: Using apache2 (3.2.2)
+==> d1-node-1: Using mingw (1.2.4)
+==> d1-node-1: Using mysql (8.0.2)
+==> d1-node-1: Using openssl (4.4.0)
+==> d1-node-1: Using seven_zip (2.0.2)
+==> d1-node-1: Using tarball (0.0.1) from git://github.com/ooyala/tarball-chef-cookbook.git (at master)
+==> d1-node-1: Using windows (1.44.3)
+==> d1-node-1: Using build-essential (6.0.4)
+==> d1-node-1: Using chef_handler (1.4.0)
+==> d1-node-1: Using mariadb (0.3.1)
+==> d1-node-1: Using mysql2_chef_gem (1.1.0)
+==> d1-node-1: Using tar (0.7.0)
+==> d1-node-1: Using yum (3.12.0)
+==> d1-node-1: Using homebrew (2.1.2)
+==> d1-node-1: Using postgresql (4.0.6)
+==> d1-node-1: Using myface (1.0.0) from source at .
+==> d1-node-1: Using users (3.0.0)
+==> d1-node-1: Vendoring apache2 (3.2.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/apache2
+==> d1-node-1: Vendoring apt (2.9.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/apt
+==> d1-node-1: Vendoring build-essential (6.0.4) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/build-essential
+==> d1-node-1: Vendoring chef-sugar (3.4.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/chef-sugar
+==> d1-node-1: Vendoring chef_handler (1.4.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/chef_handler
+==> d1-node-1: Vendoring compat_resource (12.13.38) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/compat_resource
+==> d1-node-1: Vendoring database (5.1.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/database
+==> d1-node-1: Vendoring firewall (2.4.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/firewall
+==> d1-node-1: Vendoring homebrew (2.1.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/homebrew
+==> d1-node-1: Vendoring java (1.42.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/java
+==> d1-node-1: Vendoring line (0.6.3) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/line
+==> d1-node-1: Vendoring mariadb (0.3.1) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/mariadb
+==> d1-node-1: Vendoring mingw (1.2.4) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/mingw
+==> d1-node-1: Vendoring myface (1.0.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/myface
+==> d1-node-1: Vendoring mysql (8.0.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/mysql
+==> d1-node-1: Vendoring mysql2_chef_gem (1.1.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/mysql2_chef_gem
+==> d1-node-1: Vendoring openssl (4.4.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/openssl
+==> d1-node-1: Vendoring postgresql (4.0.6) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/postgresql
+==> d1-node-1: Vendoring seven_zip (2.0.2) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/seven_zip
+==> d1-node-1: Vendoring tar (0.7.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/tar
+==> d1-node-1: Vendoring tarball (0.0.1) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/tarball
+==> d1-node-1: Vendoring users (3.0.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/users
+==> d1-node-1: Vendoring windows (1.44.3) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/windows
+==> d1-node-1: Vendoring yum (3.12.0) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/yum
+==> d1-node-1: Vendoring yum-epel (0.7.1) to /home/ashwin/.berkshelf/vagrant-berkshelf/shelves/berkshelf20161014-22834-1abb52v-d1-node-1/yum-epel
+==> d1-node-1: Using hostname "d1-node-1" as node name for Chef...
+==> d1-node-1: Chef 12.13.37 Omnibus package is already installed.
+==> d1-node-1: Running provisioner: hostmanager...
+Working with host d1-gw-1 with IP : 192.168.1.105
+Working with host d1-node-2 with IP : 192.168.1.107
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+Working with host d1-node-3 with IP : 192.168.1.108
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+Working with host d1-node-4 with IP : 192.168.1.109
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+Working with host d1-node-5 with IP : 192.168.1.110
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/masters
+Working with node HadoopMaster
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave1
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave2
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave3
+Adding Hadoop Config for /usr/local/hadoop/etc/hadoop/slaves
+Working with node HadoopSlave4
+==> d1-node-1: Running provisioner: chef_solo...
+==> d1-node-1: Detected Chef (latest) is already installed
+STDERR: Shared folders that Chef requires are missing on the virtual machine.
+This is usually due to configuration changing after already booting the
+machine. The fix is to run a `vagrant reload` so that the proper shared
+folders will be prepared and mounted on the VM.
+---- End output of vagrant provision d1-node-1 ----
+Ran vagrant provision d1-node-1 returned 1
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/mixlib-shellout-2.2.6/lib/mixlib/shellout.rb:289:in `invalid!'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/mixlib-shellout-2.2.6/lib/mixlib/shellout.rb:276:in `error!'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/mixin/shell_out.rb:45:in `shell_out!'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/provider/execute.rb:62:in `block in action_run'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/mixin/why_run.rb:52:in `add_action'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/provider.rb:176:in `converge_by'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/provider/execute.rb:60:in `action_run'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/provider.rb:145:in `run_action'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource.rb:603:in `run_action'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:69:in `run_action'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:97:in `block (2 levels) in converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:97:in `each'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:97:in `block in converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/resource_list.rb:94:in `block in execute_each_resource'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:116:in `call'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:116:in `call_iterator_block'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:85:in `step'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:104:in `iterate'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/stepable_iterator.rb:55:in `each_with_index'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/resource_collection/resource_list.rb:92:in `execute_each_resource'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/runner.rb:96:in `converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:669:in `block in converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:664:in `catch'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:664:in `converge'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:703:in `converge_and_save'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/client.rb:283:in `run'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:302:in `block in fork_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:290:in `fork'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:290:in `fork_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:255:in `block in run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/local_mode.rb:44:in `with_server_connectivity'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:243:in `run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:464:in `sleep_then_run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:451:in `block in interval_run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:450:in `loop'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:450:in `interval_run_chef_client'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application/client.rb:434:in `run_application'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/lib/chef/application.rb:60:in `run'
+/opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/chef-12.13.37/bin/chef-client:26:in `<top (required)>'
+/opt/chefdk/bin/chef-client:59:in `load'
+/opt/chefdk/bin/chef-client:59:in `<main>'

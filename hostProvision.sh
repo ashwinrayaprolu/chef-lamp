@@ -1,0 +1,1 @@
+/opt/chefdk/bin/chef-client --local -c solo.rb -j solo.json
