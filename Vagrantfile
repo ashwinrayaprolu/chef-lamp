@@ -288,7 +288,13 @@ NEWDOC
 SHELL
                 
                    
-               # end            
+               # end 
+              else
+                vagrant.vm.provision "shell", preserve_order: true,inline: <<-ZKMYID
+                  runuser -l hduser -c 'rm -rf /var/lib/zookeeper/myid'
+                  runuser -l hduser -c 'touch /var/lib/zookeeper/myid'
+                  runuser -l hduser -c 'echo #{myNodeIndex} > /var/lib/zookeeper/myid'
+ZKMYID
               end 
             end 
           end
