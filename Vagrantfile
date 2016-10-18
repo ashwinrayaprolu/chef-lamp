@@ -239,16 +239,21 @@ HDCONF
             runuser -l hduser -c 'ssh-keyscan -H localhost | grep "sha2-nistp256" >> ~/.ssh/known_hosts'
 NEWDOC
 
+            zookeeperServers = "";
             # Iterate over all nodes
             1.upto(node_json["NumberOfNodes"]) do |myNodeIndex|
               
               if(myNodeIndex == 1) 
-                alias_name = "HadoopMaster"
+                alias_name = "HadoopMaster";
                 nodeFileName = "/usr/local/hadoop/etc/hadoop/masters";
+                zookeeperServers = alias_name + ":2181";
               else
                 nodeFileName = "/usr/local/hadoop/etc/hadoop/slaves";
-                alias_name = "HadoopSlave" + "#{myNodeIndex-1}"
+                alias_name = "HadoopSlave" + "#{myNodeIndex-1}";
+                zookeeperServers = zookeeperServers + ",#{alias_name}:2181";
               end
+              
+              
               
              # puts "Adding Hadoop Config for #{nodeFileName}"
                 
@@ -297,6 +302,17 @@ SHELL
 ZKMYID
               end 
             end 
+            # End of Iteration of all Nodes
+            # Configure Zookeeper servers in Kafka
+            puts "Adding #{zookeeperServers} to kafka";
+            vagrant.vm.provision "shell", preserve_order: true,inline: <<-KAFKACONFIG
+              chown -R hduser:hadoop /usr/local/kafka/
+              runuser -l hduser -c  "sed -i 's/broker\.id=0/broker\.id=#{nodeIndex-1}/g' /usr/local/kafka/config/server.properties"
+              runuser -l hduser -c  "sed -i 's/localhost:2181/#{zookeeperServers}/g' /usr/local/kafka/config/server.properties"
+KAFKACONFIG
+            
+            
+            
           end
           
         end  # End of VM Config

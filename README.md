@@ -175,6 +175,50 @@ Include `myface` in your node's `run_list`:
 ```
 
 
+### Useful Commands
+
+```
+# To start/stop and connect to zookeeper
+/usr/local/zookeeper/bin/zkServer.sh start
+/usr/local/zookeeper/bin/zkServer.sh stop
+/usr/local/zookeeper/bin/zkCli.sh -server 127.0.0.1:2181
+
+
+
+# To Start/Stop Kafka
+bin/kafka-server-start.sh config/server.properties
+bin/kafka-server-stop.sh config/server.properties
+
+-- Testing some topics and data
+/usr/local/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-replicated-topic
+/usr/local/kafka/bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic
+/usr/local/kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+
+# Cassandra Commands
+
+nohup $CASSANDRA_HOME/bin/cassandra &
+$CASSANDRA_HOME/bin/nodetool status
+
+# Connect to cassandra on any node
+$CASSANDRA_HOME/bin/cqlsh  d1-node-1 9042
+$CASSANDRA_HOME/bin/cqlsh  d1-node-2 9042
+$CASSANDRA_HOME/bin/cqlsh  d1-node-3 9042
+
+$CASSANDRA_HOME/bin/nodetool -h d1-node-1 enablethrift ; sleep 1
+
+# To Stop Cassandra follow below commands
+$CASSANDRA_HOME/bin/nodetool -h d1-node-1 disablethrift ; sleep 1
+$CASSANDRA_HOME/bin/nodetool -h d1-node-1 disablebinary ; sleep 1
+$CASSANDRA_HOME/bin/nodetool -h d1-node-1 disablegossip ; sleep 20
+$CASSANDRA_HOME/bin/nodetool -h d1-node-1 drain
+
+
+
+nohup /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties &
+
+```
+
 ## License and Authors
 
 Author:: Ashwin Rayaprolu (ashwin.rayaprolu@gmail.com)
