@@ -1,5 +1,12 @@
-# LAMP-cookbook
+# Distributed Environement-cookbook
 ```desc
+Started off with creating LAMP stack but added support 
+Hadoop/Yarn/Cassandra/Zookeeper/Docker
+Will add support for
+Spark/Pig/Hive in next iteration
+
+Along with Mean Stack and Java Stack
+
 This is series 1 of different developmental machine cookbook's by me
 LAMP Stack for Developers.
 This is based of https://github.com/misheska/myface
