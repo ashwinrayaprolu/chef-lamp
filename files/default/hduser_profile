@@ -35,5 +35,6 @@ export HADOOP_OPTS="$HADOOP_OPTS -Djava.library.path=$HADOOP_HOME/lib/native"
 
 export ZOOKEEPER_HOME=/usr/local/zookeeper
 export ZK_HOME=/usr/local/zookeeper
-export PATH=$PATH:$ZK_HOME/bin
+export PIG_HOME=/usr/local/pig
+export PATH=$PATH:$ZK_HOME/bin:$PIG_HOME/bin
 export ZOO_LOG_DIR=/usr/local/zookeeper/logs/

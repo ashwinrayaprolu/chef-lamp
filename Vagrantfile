@@ -197,7 +197,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           end
           
           if is_public
-            config.vm.network "public_network", type: "dhcp", bridge: "em1"
+            puts "--------------------Configuring Public Network----------------"
+            vagrant.vm.network "public_network", type: "dhcp", bridge: "em1"
             vagrant.vm.provider :virtualbox do |vb|
                 vb.customize ["modifyvm", :id, "--memory", "2048"]
                 vb.customize ["modifyvm", :id, "--cpus", "2"]

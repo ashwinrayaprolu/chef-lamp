@@ -35,6 +35,7 @@
     "recipe[myface::hdfs]",
     "recipe[myface::cassandra]",
     "recipe[myface::zookeeper]",
-    "recipe[myface::kafka]"
+    "recipe[myface::kafka]",
+    "recipe[myface::hadoop-utils]"
   ]
 }

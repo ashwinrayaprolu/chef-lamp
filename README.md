@@ -185,6 +185,27 @@ Include `myface` in your node's `run_list`:
 ### Useful Commands
 
 ```
+
+#Hadoop/HDFS Commands
+
+$HADOOP_HOME/bin/hdfs namenode -format
+$HADOOP_HOME/sbin/start-dfs.sh
+$HADOOP_HOME/sbin/stop-dfs.sh
+
+look at http://dnode1:50070/
+
+$HADOOP_HOME/sbin/start-yarn.sh
+$HADOOP_HOME/sbin/stop-yarn.sh
+
+look at http://dnode1:8088/
+
+$HADOOP_HOME/sbin/mr-jobhistory-daemon.sh --config $HADOOP_HOME/etc/hadoop start historyserver
+$HADOOP_HOME/sbin/mr-jobhistory-daemon.sh --config $HADOOP_HOME/etc/hadoop stop historyserver
+
+look at http://dnode1:19888/
+
+
+
 # To start/stop and connect to zookeeper
 /usr/local/zookeeper/bin/zkServer.sh start
 /usr/local/zookeeper/bin/zkServer.sh stop
