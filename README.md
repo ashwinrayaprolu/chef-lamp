@@ -205,6 +205,10 @@ $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh --config $HADOOP_HOME/etc/hadoop stop 
 look at http://dnode1:19888/
 
 
+#Apache Spark Commands
+$SPARK_HOME/sbin/start-all.sh
+
+
 
 # To start/stop and connect to zookeeper
 /usr/local/zookeeper/bin/zkServer.sh start

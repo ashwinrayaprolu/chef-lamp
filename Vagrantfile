@@ -230,6 +230,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             vagrant.vm.provision "shell", preserve_order: true,inline: <<-HDCONF
                 runuser -l hduser -c 'rm -rf /usr/local/hadoop/etc/hadoop/masters'
                 runuser -l hduser -c 'rm -rf /usr/local/hadoop/etc/hadoop/slaves'
+                runuser -l hduser -c 'rm -rf /usr/local/spark/conf/slaves'
 HDCONF
 
 
@@ -241,6 +242,7 @@ HDCONF
 NEWDOC
 
             zookeeperServers = "";
+            sparkNodeFileName = "/usr/local/spark/conf/slaves";
             # Iterate over all nodes
             1.upto(node_json["NumberOfNodes"]) do |myNodeIndex|
               
@@ -260,7 +262,9 @@ NEWDOC
                 
               vagrant.vm.provision "shell", preserve_order: true,inline: <<-HDCONF
                   runuser -l hduser -c 'touch #{nodeFileName}'
+                  runuser -l hduser -c 'touch #{sparkNodeFileName}'
                   runuser -l hduser -c 'echo  "#{alias_name}">> #{nodeFileName}'
+                  runuser -l hduser -c 'echo  "#{alias_name}">> #{sparkNodeFileName}'
                   runuser -l hduser -c 'echo "server.#{myNodeIndex}=#{alias_name}:2888:3888">>/usr/local/zookeeper/conf/zoo.cfg'
 HDCONF
           
@@ -311,6 +315,16 @@ ZKMYID
               runuser -l hduser -c  "sed -i 's/broker\.id=0/broker\.id=#{nodeIndex-1}/g' /usr/local/kafka/config/server.properties"
               runuser -l hduser -c  "sed -i 's/localhost:2181/#{zookeeperServers}/g' /usr/local/kafka/config/server.properties"
 KAFKACONFIG
+
+            vagrant.vm.provision "shell", preserve_order: true,inline: <<-SPARKCONFIG
+              chown -R hduser:hduser /usr/local/spark/
+              runuser -l hduser -c  "sed -i 's/\# spark/spark/g' /usr/local/spark/conf/spark-defaults.conf"
+              runuser -l hduser -c  "sed -i 's/directory/user\\\/hduser\\\/applicationHistory/g' /usr/local/spark/conf/spark-defaults.conf"
+              runuser -l hduser -c  "sed -i 's/master/HadoopMaster/g' /usr/local/spark/conf/spark-defaults.conf"
+              runuser -l hduser -c  "sed -i 's/5g/1g/g' /usr/local/spark/conf/spark-defaults.conf"
+              runuser -l hduser -c  "sed -i 's/namenode/HadoopMaster/g' /usr/local/spark/conf/spark-defaults.conf"
+              runuser -l hduser -c  "sed -i 's/8021/9000/g' /usr/local/spark/conf/spark-defaults.conf"
+SPARKCONFIG
             
             
             
